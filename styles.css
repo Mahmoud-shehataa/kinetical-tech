@@ -135,7 +135,7 @@ textarea {
 }
 
 .brand img {
-  width: 54px;
+  width: 95px;
   height: auto;
   border-radius: 12px;
   transition: transform 0.3s ease;
@@ -254,7 +254,7 @@ textarea {
   padding: 0 26px;
   border-radius: 999px;
   border: 1px solid transparent;
-  font-weight: 900;
+  font-weight: 600;
   cursor: pointer;
   transition: transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
   text-align: center;
@@ -272,7 +272,7 @@ textarea {
 .btn-primary {
   background: linear-gradient(135deg, var(--gold), #f5b934);
   color: var(--black);
-  box-shadow: 0 12px 30px rgba(238, 198, 67, 0.25);
+  box-shadow: 0 5px 40px rgba(238, 198, 67, 0.18);
 }
 
 .btn-primary:hover {
@@ -389,9 +389,9 @@ textarea {
 
 .hero-title strong {
   color: var(--aqua);
-  font-style: normal;
-  font-weight: 900;
-  text-shadow: 0 0 30px rgba(0, 239, 204, 0.3);
+  font-style: italic;
+  font-weight: 700;
+  text-shadow: 0 0px 50px rgba(0, 239, 204, 0.18);
 }
 
 .hero-lead {
@@ -543,7 +543,7 @@ textarea {
   inset-inline-start: 0;
   inset-inline-end: 0;
   height: 4px;
-  background: linear-gradient(90deg, var(--aqua), var(--blue), var(--gold));
+  /* background: linear-gradient(90deg, var(--aqua), var(--blue), var(--gold)); */
 }
 
 .dashboard-title {
