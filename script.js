@@ -4,12 +4,42 @@ const langButton = document.querySelector('.lang-toggle');
 const menuButton = document.querySelector('.menu-toggle');
 const navLinks = document.querySelector('#navLinks');
 const contactForm = document.querySelector('.contact-form');
+const mainContent = document.querySelector('main');
+const footer = document.querySelector('.footer');
 
 // Focus trap helpers for mobile menu
 let lastFocusedElement = null;
 let focusHandler = null;
 let focusTrapActive = false;
 const focusableSelectors = 'a[href], area[href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), button:not([disabled]), [tabindex]:not([tabindex="-1"])';
+
+function throttle(fn, wait) {
+  let last = 0;
+  let timer = null;
+  return function () {
+    const now = Date.now();
+    const remaining = wait - (now - last);
+    if (remaining <= 0) {
+      if (timer) { clearTimeout(timer); timer = null; }
+      last = now;
+      fn();
+    } else if (!timer) {
+      timer = setTimeout(function () {
+        last = Date.now();
+        timer = null;
+        fn();
+      }, remaining);
+    }
+  };
+}
+
+function setPageInert(isInert) {
+  [mainContent, footer].forEach((element) => {
+    if (element) {
+      element.setAttribute('aria-hidden', String(isInert));
+    }
+  });
+}
 
 function trapFocus(container) {
   lastFocusedElement = document.activeElement;
@@ -32,10 +62,22 @@ function trapFocus(container) {
   document.addEventListener('keydown', focusHandler);
 }
 
-function releaseTrap() {
+function releaseTrap({ restoreFocus = true } = {}) {
   focusTrapActive = false;
   if (focusHandler) document.removeEventListener('keydown', focusHandler);
-  if (lastFocusedElement) lastFocusedElement.focus();
+  if (restoreFocus && lastFocusedElement) lastFocusedElement.focus();
+}
+
+function closeMenu({ restoreFocus = true } = {}) {
+  navLinks.classList.remove('open');
+  menuButton.setAttribute('aria-expanded', 'false');
+  menuButton.setAttribute('aria-label', body.classList.contains('lang-ar') ? 'فتح القائمة' : 'Open menu');
+  document.body.style.overflow = '';
+  setPageInert(false);
+  releaseTrap({ restoreFocus });
+  if (restoreFocus) {
+    menuButton.focus();
+  }
 }
 
 // Language switching with smooth content handling
@@ -75,13 +117,32 @@ langButton.addEventListener('click', () => {
   applyLanguage(body.classList.contains('lang-ar') ? 'en' : 'ar');
 });
 
-// Scrolled header state listener
+// Scrolled header + active nav section tracking
 const header = document.querySelector('.site-header');
-if (header) {
-  window.addEventListener('scroll', () => {
+const navAnchors = document.querySelectorAll('.nav-links a[href^="#"]');
+const sectionTargets = Array.from(navAnchors).map(function (a) {
+  return document.getElementById(a.getAttribute('href').slice(1));
+}).filter(Boolean);
+
+function onScroll() {
+  if (header) {
     header.classList.toggle('scrolled', window.scrollY > 20);
-  }, { passive: true });
+  }
+  const scrollY = window.scrollY + 160;
+  let current = '';
+  sectionTargets.forEach(function (el) {
+    const top = el.getBoundingClientRect().top + window.scrollY;
+    if (scrollY >= top) {
+      current = el.id;
+    }
+  });
+  navAnchors.forEach(function (a) {
+    a.classList.toggle('active', a.getAttribute('href') === '#' + current);
+  });
 }
+
+window.addEventListener('scroll', throttle(onScroll, 100), { passive: true });
+onScroll();
 
 // Mobile menu toggle
 menuButton.addEventListener('click', () => {
@@ -91,9 +152,7 @@ menuButton.addEventListener('click', () => {
 
   // Prevent background scroll while menu is open and mark rest of page inert for assistive tech
   document.body.style.overflow = open ? 'hidden' : '';
-  document.querySelectorAll('main, .footer, .site-header:not(.nav)').forEach(el => {
-    if (el) el.setAttribute('aria-hidden', String(open));
-  });
+  setPageInert(open);
 
   if (open) {
     // focus first focusable item inside the menu and trap focus
@@ -109,19 +168,14 @@ menuButton.addEventListener('click', () => {
 // Close mobile menu on link navigation
 navLinks.querySelectorAll('a').forEach((link) => {
   link.addEventListener('click', () => {
-    navLinks.classList.remove('open');
-    menuButton.setAttribute('aria-expanded', 'false');
-    menuButton.setAttribute('aria-label', body.classList.contains('lang-ar') ? 'فتح القائمة' : 'Open menu');
+    closeMenu({ restoreFocus: false });
   });
 });
 
 // Close menu on ESC
 document.addEventListener('keydown', (e) => {
   if (e.key === 'Escape' && navLinks.classList.contains('open')) {
-    navLinks.classList.remove('open');
-    menuButton.setAttribute('aria-expanded', 'false');
-    menuButton.setAttribute('aria-label', body.classList.contains('lang-ar') ? 'فتح القائمة' : 'Open menu');
-    menuButton.focus();
+    closeMenu();
   }
 });
 
@@ -196,25 +250,18 @@ if (contactForm) {
     const originalText = textTarget.textContent;
     const originalIcon = iconTarget ? iconTarget.getAttribute('href') : '';
     
-    // 1. Enter disabled loading state during async processing
     btn.disabled = true;
+    btn.classList.add('btn-loading');
     textTarget.textContent = isAr ? 'جاري الإرسال...' : 'Sending...';
     if(iconTarget) iconTarget.setAttribute('href', '#icon-spinner');
-    btn.style.cursor = 'wait';
-    btn.style.opacity = '0.8';
-    
-    // Simulated async network delay before success confirmation
+
     setTimeout(() => {
-      // 2. Success visual confirmation feedback
+      btn.classList.remove('btn-loading');
+      btn.classList.add('btn-success');
       textTarget.textContent = isAr ? '✓ تم الإرسال بنجاح' : '✓ Sent Successfully';
-      if(iconTarget) iconTarget.setAttribute('href', ''); // hide icon on success or keep it hidden
-      btn.style.background = 'var(--aqua)';
-      btn.style.color = 'var(--black)';
-      btn.style.cursor = 'default';
-      btn.style.opacity = '1';
-      
+      if(iconTarget) iconTarget.setAttribute('href', '');
+
       setTimeout(() => {
-        // Accessible inline success message (avoid blocking alert())
         const prevSuccess = contactForm.querySelector('.form-success');
         if (prevSuccess) prevSuccess.remove();
         const success = document.createElement('div');
@@ -224,20 +271,15 @@ if (contactForm) {
         success.textContent = isAr ? 'شكراً لك! تم استلام طلبك وسنتواصل معك قريباً.' : 'Thank you! Your consultation request has been received. Our team will contact you shortly.';
         contactForm.prepend(success);
 
-        // Clear form state after short delay and restore button
         setTimeout(() => {
           contactForm.reset();
           contactForm.classList.remove('was-validated');
           contactForm.querySelectorAll('.touched').forEach(input => input.classList.remove('touched'));
           contactForm.querySelectorAll('[aria-invalid="true"]').forEach(i => i.setAttribute('aria-invalid', 'false'));
-          // Restore standard interaction states
           btn.disabled = false;
+          btn.classList.remove('btn-success');
           textTarget.textContent = originalText;
           if(iconTarget) iconTarget.setAttribute('href', originalIcon);
-          btn.style.background = '';
-          btn.style.color = '';
-          btn.style.cursor = '';
-          // Remove success message after a little while
           setTimeout(() => success.remove(), 3500);
         }, 700);
       }, 800);
