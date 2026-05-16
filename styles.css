@@ -60,6 +60,20 @@ a {
   text-decoration: none;
 }
 
+h1 {
+  font-weight: 750 !important;
+}
+h2 {
+  font-weight: 650 !important;
+}
+h3
+{
+  font-weight: 600 !important;
+}
+h4 {
+  font-weight: 550 !important;
+}
+
 img {
   max-width: 100%;
   display: block;
@@ -122,7 +136,7 @@ main {
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border-bottom: 1px solid var(--border);
-  transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+  transition: background-color 0.5 ease, border-color 0.5 ease, box-shadow 0.5 ease;
 }
 
 .site-header.scrolled {
@@ -152,7 +166,7 @@ main {
   width: 95px;
   height: auto;
   border-radius: 12px;
-  transition: transform 0.3s ease;
+  transition: transform 0.5 ease;
 }
 
 .brand:hover img {
@@ -249,7 +263,7 @@ main {
   height: 2px;
   background: currentColor;
   border-radius: 2px;
-  transition: transform 0.3s ease, opacity 0.3s ease;
+  transition: transform 0.5 ease, opacity 0.5 ease;
 }
 
 .menu-toggle[aria-expanded="true"] span:nth-child(1) {
@@ -315,6 +329,7 @@ main {
   background: linear-gradient(135deg, var(--red), #c64314);
   color: var(--white);
   box-shadow: 0 12px 30px rgba(145, 38, 0, 0.3);
+  margin-top: 30px;
 }
 
 .btn-accent:hover {
@@ -398,18 +413,18 @@ main {
   color: var(--red);
   letter-spacing: 0.24em;
   text-transform: uppercase;
-  font-weight: 900;
+  font-weight: 750;
   font-size: 0.85rem;
   display: inline-block;
   /* background: rgba(145, 38, 0, 0.15); */
   padding: 4px 12px;
   border-radius: 6px;
-  border: 1px solid rgba(145, 38, 0, 0.3);
+  /* border: 1px solid rgba(145, 38, 0, 0.3); */
 }
 
 .panel.light .section-index,
 .panel.light .mini-label {
-  background: rgba(145, 38, 0, 0.08);
+  /* background: rgba(145, 38, 0, 0.08); */
 }
 
 .hero-title {
@@ -418,7 +433,7 @@ main {
   margin: 22px 0;
   color: var(--white);
   letter-spacing: -0.06em;
-  font-weight: 900;
+  font-weight: 750;
 }
 
 .hero-title strong {
@@ -693,7 +708,6 @@ main {
 
 .section-header h2 {
   font-size: clamp(2.4rem, 5vw, 4.2rem);
-  font-weight: 900;
   line-height: 1.05;
   margin: 0 0 20px;
   letter-spacing: -0.04em;
@@ -701,6 +715,8 @@ main {
 
 .section-header h2 strong {
   color: var(--blue);
+  text-shadow: 0 0px 50px rgba(0, 239, 204, 0.18);
+  font-style: italic;
 }
 
 .section-lead {
@@ -709,20 +725,20 @@ main {
 }
 
 .bento-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
-  align-items: stretch;
+    display: grid;
+    /* grid-template-columns: repeat(3, 1fr); */
+    gap: 25px;
+    align-items: center;
 }
 
 .bento-card {
   background: var(--surface-2);
-  border: 1px solid var(--border);
+  /* border: 1px solid var(--border); */
   border-radius: var(--radius-sm);
   padding: 36px;
-  position: relative;
+  position: static;
   overflow: hidden;
-  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+  transition: transform 0.5 ease, box-shadow 0.5 ease, border-color 0.5 ease;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -736,7 +752,7 @@ main {
   inset-inline-end: 0;
   height: 3px;
   opacity: 0.7;
-  transition: opacity 0.3s ease;
+  transition: opacity 0.5 ease;
 }
 
 .bento-card:hover {
@@ -760,7 +776,9 @@ main {
 }
 
 .bento-card.dark-gloss {
-  background: linear-gradient(135deg, var(--ink), var(--surface-2));
+  background: linear-gradient(5deg, rgba(9, 32, 51, 0.8) 0%, rgba(12, 69, 112, 0.94) 56%, rgba(22, 138, 209, 0.8) 100%),
+    url('assets/Pattern%202/p-4x4.png');
+  box-shadow: 0 10px 30px rgba(6, 7, 10, 0.03);
 }
 
 .bento-card.dark-gloss::before {
@@ -781,7 +799,6 @@ main {
 
 .bento-content h3 {
   font-size: 2rem;
-  font-weight: 900;
   margin: 0 0 16px;
   line-height: 1.1;
 }
@@ -853,8 +870,7 @@ main {
 }
 
 .panel h2 strong {
-  color: var(--blue);
-  font-weight: 900;
+  color: var(--white);
 }
 
 .panel p {
@@ -863,9 +879,11 @@ main {
 }
 
 .panel.dark {
-  background: var(--ink);
+  /* background: var(--ink); */
   color: var(--white);
   border-inline-end: 1px solid var(--border-subtle);
+  background: linear-gradient(5deg, rgba(9, 32, 51, 0.8) 0%, rgba(12, 69, 112, 0.94) 56%, rgba(22, 138, 209, 0.8) 100%),
+    url('assets/Pattern%202/p-4x4.png') !important;
 }
 
 .panel.dark p {
@@ -879,14 +897,16 @@ main {
 
 .panel.light h2 strong {
   color: var(--blue);
+  text-shadow: 0 0px 50px rgba(0, 239, 204, 0.18);
+  font-style: italic;
 }
 
 .panel.gradient,
 .cta-panel {
-  background: linear-gradient(150deg, rgba(9, 32, 51, 0.94) 0%, rgba(12, 69, 112, 0.94) 56%, rgba(22, 138, 209, 0.94) 100%),
-    url('assets/Pattern%202/p-4x4.png') repeat;
+  background: linear-gradient(5deg, rgba(9, 32, 51, 0.8) 0%, rgba(12, 69, 112, 0.94) 56%, rgba(22, 138, 209, 0.8) 100%),
+    url('assets/Pattern%202/p-4x4.png');
   background-size: 180px;
-  background-blend-mode: overlay;
+  background-blend-mode: luminosity;
   color: var(--white);
 }
 
@@ -1036,7 +1056,7 @@ body[dir="rtl"] .stacked-cards article:hover {
   height: 32px;
   fill: var(--blue);
   flex: none;
-  transition: transform 0.3s ease;
+  transition: transform 0.5s ease;
 }
 
 .value-grid article:hover svg,
@@ -1049,7 +1069,6 @@ body[dir="rtl"] .stacked-cards article:hover {
   margin: 16px 0 8px;
   color: var(--blue);
   font-size: 1.25rem;
-  font-weight: 900;
 }
 
 .value-grid p,
@@ -1063,12 +1082,13 @@ body[dir="rtl"] .stacked-cards article:hover {
   margin-top: 24px;
   border-radius: var(--radius-sm);
   padding: 24px;
-  background: linear-gradient(135deg, var(--red), #c64314);
-  color: var(--white);
+  /* background: linear-gradient(135deg, var(--red), #c64314); */
+  color: var(--red);
+  border: 1px solid rgba(145, 38, 0, 0.2);
   font-size: 1.2rem;
-  font-weight: 900;
+  font-weight: 750;
   text-align: center;
-  box-shadow: 0 12px 30px rgba(145, 38, 0, 0.2);
+  /* box-shadow: 0 12px 30px rgba(145, 38, 0, 0.2); */
 }
 
 /* Number List */
@@ -1116,7 +1136,7 @@ body[dir="rtl"] .number-list article:hover {
   margin: 0;
   color: var(--blue);
   font-size: 1.2rem;
-  font-weight: 900;
+  
 }
 
 .number-list p {
@@ -1181,7 +1201,7 @@ body[dir="rtl"] .number-list article:hover {
   margin: 0;
   color: var(--white);
   font-size: 1.4rem;
-  font-weight: 900;
+  
 }
 
 .service-list p {
@@ -1195,10 +1215,10 @@ body[dir="rtl"] .number-list article:hover {
   position: relative;
   overflow: hidden;
   border-radius: var(--radius-sm);
-  background: linear-gradient(145deg, rgba(9, 32, 51, 0.98), rgba(0, 110, 165, 0.9)),
-    url('assets/Pattern%201/p-4x4.png') repeat;
+  background: linear-gradient(5deg, rgba(9, 32, 51, 0.8) 0%, rgba(12, 69, 112, 0.94) 56%, rgba(22, 138, 209, 0.8) 100%),
+    url('assets/Pattern%202/p-4x4.png');
   background-size: 150px;
-  background-blend-mode: overlay;
+  background-blend-mode: luminosity;
   color: var(--white);
   padding: 40px;
   margin: 24px 0;
@@ -1229,7 +1249,7 @@ body[dir="rtl"] .number-list article:hover {
   font-size: 2.2rem;
   line-height: 1.1;
   margin: 14px 0;
-  font-weight: 900;
+  
 }
 
 .spotlight-card p {
@@ -1341,7 +1361,7 @@ body[dir="rtl"] .timeline li:not(:last-child)::after {
 }
 
 .form-group label {
-  font-weight: 800;
+  font-weight: 500;
   color: var(--white);
   font-size: 0.95rem;
   cursor: pointer;
@@ -1531,7 +1551,7 @@ html[lang="ar"] [data-lang="en"] {
     visibility: hidden;
     opacity: 0;
     transform: translateY(-10px);
-    transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s ease;
+    transition: opacity 0.5s ease, transform 0.5s ease, visibility 0.5 ease;
   }
 
   .nav-links.open {
