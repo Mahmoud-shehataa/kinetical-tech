@@ -63,6 +63,9 @@ a {
 h1 {
   font-weight: 750 !important;
 }
+h1 span{
+  font-size : 5rem;
+}
 h2 {
   font-weight: 650 !important;
 }
@@ -360,7 +363,7 @@ main {
 /* Sections */
 .section {
   position: relative;
-  padding: 96px 0;
+  padding: clamp(40px,6vh, 70px);
 }
 
 /* Hero Section with Premium Deep Lighting */
@@ -372,7 +375,7 @@ main {
     radial-gradient(circle at 10% 80%, rgba(0, 239, 204, 0.1), transparent 40%),
     linear-gradient(135deg, #050b11 0%, #081622 43%, #0c3b5c 100%);
   overflow: hidden;
-  padding-block: clamp(72px, 9vh, 112px);
+  padding-block: clamp(40px,6vh, 70px);
 }
 
 .bg-grid {
@@ -422,11 +425,6 @@ main {
   /* border: 1px solid rgba(145, 38, 0, 0.3); */
 }
 
-.panel.light .section-index,
-.panel.light .mini-label {
-  /* background: rgba(145, 38, 0, 0.08); */
-}
-
 .hero-title {
   font-size: clamp(3.4rem, 8.5vw, 7.5rem);
   line-height: 0.92;
@@ -452,6 +450,7 @@ main {
 
 .hero-quote {
   display: grid;
+  /* font-family : "arial"; */
   grid-template-columns: 4px 1fr;
   gap: 20px;
   margin: 36px 0;
@@ -483,7 +482,7 @@ main {
 /* Genuine Asset-Backed Hero Panel */
 .hero-card {
   position: relative;
-  min-height: 480px;
+  min-height: auto;
   border: 1px solid var(--border);
   border-radius: var(--radius);
   padding: 42px;
@@ -575,8 +574,8 @@ main {
 .business-dashboard {
   background: var(--surface-2);
   border: 1px solid var(--border);
-  padding: 40px;
-  border-radius: var(--radius);
+  padding: 12px;
+  border-radius: 120px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -910,6 +909,39 @@ main {
   color: var(--white);
 }
 
+.cta-panel {
+  width: min(100%, var(--container));
+  margin-inline: auto;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 18px;
+  padding: clamp(48px, 6vw, 84px) clamp(28px, 5vw, 72px);
+}
+
+.cta-panel img{
+  width: min(100%, 420px);
+  height: auto;
+  display: block;
+  margin-inline: auto;
+  border-radius: 40px;
+}
+
+.cta-panel .contact-form {
+  width: 100%;
+  max-width: 760px;
+  margin-top: 18px;
+  text-align: start;
+}
+
+.cta-panel h2,
+.cta-panel p {
+  max-width: 760px;
+}
+
 .panel.gradient p,
 .cta-panel p {
   color: #e5eff6;
@@ -1055,6 +1087,8 @@ body[dir="rtl"] .stacked-cards article:hover {
   width: 32px;
   height: 32px;
   fill: var(--blue);
+  stroke: var(--blue);
+  stroke-width: 0.2px;
   flex: none;
   transition: transform 0.5s ease;
 }
@@ -1175,7 +1209,7 @@ body[dir="rtl"] .number-list article:hover {
 
 .service-list article {
   display: grid;
-  grid-template-columns: 42px 36px 1fr;
+  grid-template-columns: 36px 36px 1fr;
   gap: 16px;
   align-items: start;
   padding: 24px 0;
@@ -1258,6 +1292,134 @@ body[dir="rtl"] .number-list article:hover {
   color: #eef5f8;
   font-size: 1.1rem;
   margin: 0;
+}
+
+/* Impact Showcase */
+.showcase {
+  padding-block: 110px;
+  background:
+    radial-gradient(circle at 15% 10%, rgba(0, 239, 204, 0.08), transparent 18%),
+    radial-gradient(circle at 82% 30%, rgba(238, 198, 67, 0.08), transparent 20%),
+    linear-gradient(180deg, rgba(4, 6, 8, 0.96), rgba(8, 18, 28, 0.98));
+}
+
+.showcase .section-header {
+  margin-bottom: 40px;
+}
+
+.showcase-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.stat-card,
+.proof-card {
+  border-radius: var(--radius-sm);
+  padding: 28px;
+  border: 1px solid var(--border);
+  background: linear-gradient(180deg, rgba(16, 27, 37, 0.95), rgba(9, 18, 27, 0.95));
+  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.22);
+}
+
+.stat-card span,
+.proof-card .card-tag {
+  display: inline-block;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-size: 0.78rem;
+  font-weight: 900;
+}
+
+.stat-card span {
+  color: var(--gold);
+}
+
+.stat-card strong {
+  display: block;
+  margin: 16px 0 10px;
+  font-size: clamp(2.6rem, 5vw, 4.2rem);
+  line-height: 1;
+  color: var(--white);
+  font-weight: 900;
+}
+
+.stat-card p,
+.proof-card p {
+  color: #c8d8e4;
+  font-size: 1rem;
+  margin: 0;
+}
+
+.proof-card-large {
+  grid-column: span 2;
+  background: linear-gradient(135deg, rgba(0, 110, 165, 0.88), rgba(8, 18, 28, 0.95));
+}
+
+.proof-card h3 {
+  margin: 14px 0 12px;
+  font-size: 1.7rem;
+  line-height: 1.15;
+  color: var(--white);
+}
+
+.proof-card:not(.proof-card-large) h3 {
+  font-size: 1.25rem;
+}
+
+.proof-card .card-tag {
+  color: var(--aqua);
+}
+
+.proof-card-large .card-tag {
+  color: var(--gold);
+}
+
+.faq-panel {
+  background: linear-gradient(5deg, rgba(9, 32, 51, 0.8) 0%, rgba(12, 69, 112, 0.94) 56%, rgba(22, 138, 209, 0.8) 100%), url('assets/Pattern%202/p-4x4.png');
+  background-size: 180px;
+  background-blend-mode: luminosity;
+  color: var(--white);
+  justify-content: flex-start;
+}
+
+.faq-panel p {
+  color: #e5eff6;
+}
+
+.faq-list {
+  display: grid;
+  gap: 12px;
+  margin: 28px 0 24px;
+}
+
+.faq-list details {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(248, 254, 255, 0.1);
+  border-radius: var(--radius-sm);
+  padding: 18px 20px;
+}
+
+.faq-list summary {
+  cursor: pointer;
+  list-style: none;
+  font-weight: 800;
+  color: var(--white);
+  font-size: 1.05rem;
+}
+
+.faq-list summary::-webkit-details-marker {
+  display: none;
+}
+
+.faq-list details p {
+  margin: 12px 0 0;
+  color: #d8e2e9;
+}
+
+.faq-list details[open] {
+  border-color: rgba(0, 239, 204, 0.28);
+  background: rgba(255, 255, 255, 0.08);
 }
 
 /* Timeline */
@@ -1576,11 +1738,16 @@ html[lang="ar"] [data-lang="en"] {
 
   .hero-grid,
   .two-col,
-  .bento-grid {
+  .bento-grid,
+  .showcase-grid {
     grid-template-columns: 1fr;
   }
 
   .bento-wide {
+    grid-column: span 1;
+  }
+
+  .proof-card-large {
     grid-column: span 1;
   }
 
@@ -1589,7 +1756,7 @@ html[lang="ar"] [data-lang="en"] {
   }
 
   .hero-card {
-    min-height: 400px;
+    min-height: auto;
   }
 
   .panel {
@@ -1633,6 +1800,10 @@ html[lang="ar"] [data-lang="en"] {
 
   .section {
     padding: 68px 0;
+  }
+
+  .showcase {
+    padding-block: 72px;
   }
 
   .hero-title {
