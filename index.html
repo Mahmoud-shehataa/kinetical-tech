@@ -29,6 +29,11 @@
 
 <body>
   <a class="skip-link" href="#main">Skip to main content</a>
+  <div class="floating-circles" aria-hidden="true">
+    <span></span><span></span><span></span><span></span><span></span><span></span>
+    <span></span><span></span><span></span><span></span><span></span><span></span>
+    <span></span><span></span><span></span><span></span><span></span><span></span>
+  </div>
   <header class="site-header" id="top">
     <nav class="nav container" aria-label="Main navigation">
       <a class="brand" href="#" aria-label="Kinetical Tech home">
@@ -340,16 +345,21 @@
                   later.</span><span data-lang="ar">خدمات تقنية المعلومات الشاملة — من إنشاء البنية التحتية إلى الأمن السيبراني — متكاملة منذ اليوم الأول، وليس مجرد تفكير لاحق.</span>
               </div>
             </article>
-            <article class="hidden"><svg aria-hidden="true">
-                <use href="#icon-ai" />
-              </svg>
+            <article class="hidden"><svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/>
+              <path d="M5 3v4"/>
+              <path d="M19 17v4"/>
+              <path d="M3 5h4"/>
+              <path d="M17 19h4"/>
+            </svg>
               <div><b data-i18n-en="AI Solutions" data-i18n-ar="حلول الذكاء الاصطناعي">AI Solutions</b><span
                   data-lang="en">Intelligent automation and machine learning solutions tailored to your business needs.</span><span
                   data-lang="ar">حلول أتمتة ذكية وتعلم آلي مخصصة لاحتياجات عملك.</span></div>
           </div>
-        </div>
+        
           <a class="btn btn-accent" href="#services" data-i18n-en="Explore Our Services →"
             data-i18n-ar="استكشف خدماتنا ←">Explore Our Services →</a>
+        </div>
         </div>
       </div>
     </section>
@@ -547,13 +557,13 @@
             <p data-lang="ar">كل ميزة تُخطط حول الكفاءة أو التأثير على الإيراد أو وضوح العمليات.</p>
           </article>
 
-          <article class="proof-card">
+          <!-- <article class="proof-card">
             <b class="card-tag" data-i18n-en="ENGAGEMENT" data-i18n-ar="آلية العمل">ENGAGEMENT</b>
             <h3 data-lang="en">Flexible for startups and enterprises.</h3>
             <h3 data-lang="ar">مرن للشركات الناشئة والمؤسسات.</h3>
             <p data-lang="en">We can plug into a fresh idea or extend an existing internal team with the same discipline.</p>
             <p data-lang="ar">يمكننا الانضمام لفكرة جديدة أو دعم فريق داخلي قائم بنفس الانضباط.</p>
-          </article>
+          </article> -->
         </div>
       </div>
     </section>
@@ -656,7 +666,8 @@
           </form>
           <div class="qr-container">
             <img src="assets/Qr.jpeg" alt="" loading="lazy" id="contact-qr" />
-            <div class="text-layer">Contact Us</div>
+            <div class="text-layer" data-i18n-en="CONTACT US"
+                    data-i18n-ar="اتصل بنا">CONTACT US</div>
           </div>
         </div>
     </section>
