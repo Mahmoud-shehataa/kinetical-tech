@@ -921,7 +921,46 @@ main {
   gap: 18px;
   padding: clamp(48px, 6vw, 84px) clamp(28px, 5vw, 72px);
 }
+/* .header-image{
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  width: 100%;
 
+} */
+#contact-qr{
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 4px;
+  background: rgba(255, 255, 255, 0.02);
+  
+  width : 200px;
+  height : auto;
+}
+
+.qr-container {
+  margin-top: 70px;
+  position: relative;
+  display: block; /* Adjusts wrapper size to the QR code */
+}
+
+.text-layer {
+  /* position: sticky ; */
+  bottom: 0;
+  width: 100%;
+  
+  /* Semi-transparent background: 50% opacity (0.5) */
+  /* background-color: rgba(0, 0, 0, 0.9);  */
+  
+  /* Text styling */
+  color: white;
+  font-style: italic;
+  text-align: center;
+  font-weight : 700;
+  text-shadow: 0 0px 15px rgba( 0, 110, 165, 0.94);
+  /* box-shadow: 0 10px 30px rgba(var(--red), 0.3); */
+  padding: 10px 0;
+  box-sizing: border-box;
+}
 .cta-panel img{
   width: min(100%, 420px);
   height: auto;
